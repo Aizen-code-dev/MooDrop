@@ -1,0 +1,266 @@
+/* GLOBAL */
+*,
+*::before,
+*::after { box-sizing:border-box; }
+
+body{
+    font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;
+    background:#e0f7ff;
+    margin:0; padding:0;
+    min-height:100vh;
+    display:flex; flex-direction:column;
+    align-items:center;
+    overflow-x:hidden;
+    padding-top:60px; /* to prevent heading hiding under navbar */
+}
+
+/* RADAR BACKGROUND */
+body::before{
+    content:"";
+    position:fixed; top:-50%; left:-50%;
+    width:200%; height:200%;
+    background: radial-gradient(circle at center, rgba(0,191,255,0.12) 0%, transparent 60%);
+    animation: radarWave 6s linear infinite;
+    z-index:0;
+}
+@keyframes radarWave{
+    0%{transform:rotate(0deg) scale(0.5);opacity:0.6;}
+    50%{transform:rotate(180deg) scale(1);opacity:0.2;}
+    100%{transform:rotate(360deg) scale(0.5);opacity:0.6;}
+}
+/* NAVBAR */
+.navbar-glass {
+    background: rgba(255,255,255,0.35) !important;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+    z-index: 9999;
+    height: 54px;
+    padding: 0; /* remove horizontal padding */
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+
+/* Container: make flex full width and justify content */
+.navbar-glass .container-fluid {
+    display: flex;
+    justify-content: space-between; /* brand left, toggler right */
+    align-items: center;
+    padding: 0; /* remove container padding */
+}
+
+/* Brand fully left */
+.navbar-brand {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #00aaff !important;
+    margin-left: 0; /* left aligned */
+}
+
+/* Navbar toggler fully right */
+.navbar-toggler {
+    border: none;
+    background: transparent !important;
+    padding: 0;
+    margin-right: 0; /* no margin */
+    margin-left: auto; /* push to right */
+}
+
+.navbar-toggler:focus,
+.navbar-toggler:active {
+    outline: none;
+    box-shadow: none;
+    background: transparent !important;
+}
+
+/* Hamburger lines */
+.hamburger-icon {
+    width: 28px;
+    height: 20px;
+    position: relative;
+    display: block;
+}
+
+.hamburger-icon span {
+    position: absolute;
+    width: 100%;
+    height: 3px;
+    background: #0072ff;
+    border-radius: 3px;
+    transition: 0.35s ease;
+}
+
+/* line positions */
+.hamburger-icon span:nth-child(1) { top: 0; }
+.hamburger-icon span:nth-child(2) { top: 8px; }
+.hamburger-icon span:nth-child(3) { top: 16px; }
+
+/* Hamburger open animation */
+.navbar-toggler:not(.collapsed) .hamburger-icon span:nth-child(1) {
+    transform: rotate(45deg) translate(5px,5px);
+}
+.navbar-toggler:not(.collapsed) .hamburger-icon span:nth-child(2) {
+    opacity: 0;
+}
+.navbar-toggler:not(.collapsed) .hamburger-icon span:nth-child(3) {
+    transform: rotate(-45deg) translate(6px,-6px);
+}
+
+/* NAV LINKS */
+.navbar-nav .nav-link {
+    color: #0072ff !important;
+    font-weight: 600;
+    padding: 8px 12px;
+    border-radius: 10px;
+    transition: 0.25s;
+    gap: 20px; /* <-- change this number to increase/decrease spacing */
+
+}
+.navbar-nav .nav-link:hover {
+    background: rgba(0,114,255,0.12);
+    color: #00c6ff !important;
+}
+
+/* Donate button */
+.donate-btn {
+    background: linear-gradient(135deg, #00c6ff, #0072ff);
+    color: #fff !important;
+    padding: 6px 16px;
+    border-radius: 20px;
+}
+.donate-btn:hover {
+    transform: scale(1.05);
+}
+/* Navbar logo */
+.navbar-logo {
+    width: 28px;       /* adjust size */
+    height: 28px;
+    margin-right: 8px; /* space between logo and text */
+    vertical-align: middle;
+}
+
+
+/* MOBILE MENU */
+@media (max-width: 991px) {
+    .navbar-collapse {
+        background: rgba(255,255,255,0.55) !important;
+        backdrop-filter: blur(18px);
+        border-radius: 18px;
+        padding: 15px;
+        animation: slideDown 0.35s ease;
+        margin-left: auto;
+        margin-right: 0;
+        text-align: right;
+    }
+    .navbar-nav {
+        gap: 10px;
+        flex-direction: column;
+        align-items: flex-end;
+    }
+}
+
+@keyframes slideDown {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+
+/* PANEL */
+.main-container .panel{
+    width:100%;
+    background: rgba(255,255,255,0.25);
+    backdrop-filter: blur(16px);
+    border-radius:20px;
+    padding:25px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.15);
+    position:relative;
+}
+
+/* HEADINGS */
+h2,h3{ text-align:center; font-weight:800; color:#00aaff; }
+h2{ font-size:1.8rem; } h3{ font-size:1.2rem; margin-bottom:10px; }
+
+/* INPUTS */
+.main-container input[type="text"],
+.main-container input[type="file"]{
+    width:100%; padding:10px 14px; border-radius:10px;
+    border:none; margin-bottom:10px; font-weight:500;
+    background: rgba(255,255,255,0.7); color:#0072ff;
+}
+
+/* CUSTOM FILE LABEL */
+.custom-file-label{
+    display:block; width:100%; padding:10px 14px;
+    background: rgba(255,255,255,0.7);
+    border-radius:10px;
+    color:#0072ff; font-weight:500; text-align:center; cursor:pointer;
+    margin-bottom:10px;
+}
+.custom-file-label:hover{ background: rgba(255,255,255,0.85); }
+
+/* BUTTONS */
+button{
+    display:block; margin:10px auto; padding:10px 22px; border-radius:12px;
+    border:none; background: linear-gradient(135deg,#00c6ff,#0072ff);
+    color:#fff; font-weight:700; cursor:pointer; transition:0.25s;
+}
+button:hover{ transform:scale(1.05); }
+
+/* PROGRESS BAR */
+.progress-container{
+    width:100%; height:25px; background: rgba(0,0,0,0.05);
+    border-radius:12px; margin-top:10px; position:relative; overflow:hidden;
+}
+.progress-bar{
+    height:100%; width:0%; background:linear-gradient(135deg,#00c6ff,#0072ff); transition:0.3s;
+}
+.progress-text{
+    position:absolute; width:100%; text-align:center; color:#fff; font-weight:700;
+    line-height:25px; text-shadow:1px 1px 2px rgba(0,0,0,0.3);
+}
+
+/* INFO */
+#infoSection{
+    width:95%; max-width:650px;
+    background: rgba(255,255,255,0.22);
+    backdrop-filter: blur(12px);
+    border-radius:20px;
+    padding:20px 30px;
+    color:#0072ff; font-weight:500; line-height:1.5;
+}
+
+/* FOOTER & TRUCK */
+footer{
+    width:100%; text-align:center; position:relative; margin-top:40px;
+    padding:15px 0; background: rgba(255,255,255,0.18); backdrop-filter:blur(12px);
+}
+footer p{color:#0072ff; font-weight:600;}
+#truck{
+    position:absolute; bottom:10px; left:-100px; width:80px; height:40px;
+    background: linear-gradient(90deg,#0072ff,#00c6ff); border-radius:10px;
+    animation: truckMove 10s linear infinite;
+}
+#truck::after, #truck::before{
+    content:""; position:absolute; bottom:-10px; width:20px; height:20px;
+    background:#333; border-radius:50%;
+}
+#truck::after{ left:5px; } #truck::before{ right:5px; }
+
+@keyframes truckMove{
+    0%{transform: translateX(0);}
+    100%{transform: translateX(120vw);}
+}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+    .panel{padding:20px;}
+    h2{font-size:1.6rem;} h3{font-size:1.1rem;}
+    #infoSection{padding:15px 20px;}
+}
+@media(max-width:480px){
+    .panel{padding:15px;}
+    h2{font-size:1.4rem;} h3{font-size:1rem;}
+    .custom-file-label{font-size:0.9rem; padding:8px;}
+}

@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <!-- Favicon / Browser tab logo -->
+    <link rel="icon" type="image/x-icon" th:href="@{/img/moodrop.ico}" />
+
+    <title>MooDrop</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link th:href="@{/css/style.css}" rel="stylesheet" />
+
+    <!-- SockJS & STOMP -->
+    <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/stompjs@2.3.3/lib/stomp.min.js"></script>
+</head>
+<body>
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg navbar-glass fixed-top">
+    <div class="container-fluid d-flex align-items-center justify-content-between px-3">
+
+        <!-- Brand with logo in Thymeleaf -->
+        <a class="navbar-brand" href="#">
+            <img th:src="@{/img/moodrop.ico}"  class="navbar-logo">
+            MooDrop
+        </a>
+
+
+        <!-- Hamburger Toggler -->
+        <button class="navbar-toggler collapsed" type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarMenu"
+                aria-controls="navbarMenu"
+                aria-expanded="false"
+                aria-label="Toggle navigation">
+      <span class="hamburger-icon">
+        <span></span>
+        <span></span>
+        <span></span>
+      </span>
+        </button>
+
+        <!-- Menu -->
+        <div class="collapse navbar-collapse" id="navbarMenu">
+            <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+                <li class="nav-item">
+                    <a class="nav-link" href="#infoSection">Info</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link donate-btn" href="#footerDonate">Donate</a>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+</nav>
+
+
+
+<!-- MAIN CONTAINER -->
+<div class="main-container">
+
+    <!-- HEADER PANEL -->
+    <div class="panel">
+        <h2>MooDrop - File Sharing</h2>
+        <p id="myIdDisplay">Remote ID: <span th:text="${myId}" style="color:#0072ff;"></span></p>
+    </div>
+
+    <!-- CONNECT & FILE UPLOAD -->
+    <div class="panel" id="connectionPanel">
+        <h3>Connect to Remote Device</h3>
+        <form id="connectForm" method="post" action="/connect" onsubmit="markInternalNavigation()">
+            <input type="text" name="remoteId" placeholder="Enter Remote ID" required/>
+            <button type="submit">Connect</button>
+        </form>
+
+        <p id="connectionStatus">Not connected</p>
+
+        <hr>
+
+        <!-- FILE UPLOAD -->
+        <div id="fileTransferSection">
+            <label for="fileInput" class="custom-file-label">Choose File</label>
+            <input type="file" id="fileInput" class="custom-file-input"/>
+            <button id="uploadBtn" type="button" onclick="sendFile()" disabled>Upload File</button>
+            <div id="progressContainer"></div>
+        </div>
+    </div>
+
+    <!-- INFO SECTION -->
+    <section id="infoSection">
+        <h3>How to Use MooDrop</h3>
+        <ul>
+            <li>Enter the Remote ID and connect to a trusted device.</li>
+            <li>Select the file and click Upload. Track progress using the progress bar.</li>
+        </ul>
+
+        <h3>Safety & Data</h3>
+        <ul>
+            <li>Files are not stored on any server; direct device-to-device transfer only.</li>
+            <li>Only share your Remote ID with people you trust.</li>
+            <li>No personal data is collected by MooDrop.</li>
+            <li>Transfers are encrypted and secure.</li>
+        </ul>
+    </section>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+    <p>&copy; 2026 MooDrop. Secure & Easy File Sharing.</p>
+    <div id="truck"></div>
+</footer>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- STOMP & FILE JS -->
+<script th:inline="javascript">
+    const myId = /*[[${myId}]]*/ "X";
+    const initiallyConnected = /*[[${connected}]]*/ false;
+
+    document.getElementById("myIdDisplay").innerHTML = "Remote ID: <span style='color:#0072ff'>" + myId + "</span>";
+
+    let socket = new SockJS('/ws');
+    let stomp = Stomp.over(socket);
+
+    stomp.connect({}, function () {
+        stomp.send("/app/register", {}, myId);
+
+        // Status
+        stomp.subscribe("/topic/status/" + myId, function(msg){
+            if(msg.body==="CONNECTED") onConnected();
+            if(msg.body==="DISCONNECTED") onDisconnected();
+        });
+
+        // File chunks
+        stomp.subscribe("/topic/file/" + myId, function(msg){
+            const message = JSON.parse(msg.body);
+            receiveChunk(message);
+        });
+    });
+
+    if(initiallyConnected) onConnected();
+
+    function onConnected(){
+        document.getElementById("connectionStatus").innerText = "Connected";
+        document.getElementById("uploadBtn").disabled = false;
+    }
+
+    function onDisconnected(){
+        document.getElementById("connectionStatus").innerText = "Disconnected";
+        document.getElementById("uploadBtn").disabled = true;
+    }
+
+    let isInternalNavigation = false;
+    function markInternalNavigation(){ isInternalNavigation = true; }
+
+    function disconnect(){
+        isInternalNavigation = true;
+        fetch("/disconnect",{method:"POST"}).then(()=>location.reload());
+    }
+
+    window.addEventListener("beforeunload",function(){
+        if(!isInternalNavigation) navigator.sendBeacon("/disconnect");
+    });
+
+    // FILE TRANSFER
+    const CHUNK_SIZE = 16*1024;
+    const incomingFiles = {};
+    const uploadProgress = {};
+
+    function sendFile(){
+        const fileInput = document.getElementById("fileInput");
+        const file = fileInput.files[0];
+        if(!file) return;
+
+        const totalChunks = Math.ceil(file.size / CHUNK_SIZE);
+        let chunkIndex = 0;
+        const reader = new FileReader();
+        const container = document.getElementById("progressContainer");
+        container.innerHTML = "";
+
+        const progressWrapper = document.createElement("div");
+        progressWrapper.className="progress-container";
+
+        const progressBar = document.createElement("div");
+        progressBar.className="progress-bar";
+
+        const progressText = document.createElement("div");
+        progressText.className="progress-text";
+        progressText.innerText="0%";
+
+        progressWrapper.appendChild(progressBar);
+        progressWrapper.appendChild(progressText);
+        container.appendChild(progressWrapper);
+
+        uploadProgress[file.name] = {bar: progressBar, text: progressText};
+
+        reader.onload = function(e){
+            const chunk = new Uint8Array(e.target.result);
+            const message={
+                fromId: myId,
+                toId: document.querySelector("input[name='remoteId']").value || "N/A",
+                fileName: file.name,
+                fileType: file.type,
+                fileSize: file.size,
+                chunkIndex: chunkIndex,
+                totalChunks: totalChunks,
+                data: Array.from(chunk)
+            };
+
+            stomp.send("/app/file/send",{},JSON.stringify(message));
+            chunkIndex++;
+
+            const percent=Math.floor((chunkIndex/totalChunks)*100);
+            progressBar.style.width=percent+"%";
+            progressText.innerText=percent+"%";
+
+            if(chunkIndex<totalChunks) loadNextChunk();
+        }
+
+        function loadNextChunk(){
+            const start=chunkIndex*CHUNK_SIZE;
+            const end=Math.min(start+CHUNK_SIZE,file.size);
+            reader.readAsArrayBuffer(file.slice(start,end));
+        }
+
+        loadNextChunk();
+    }
+
+    function receiveChunk(msg){
+        const key=msg.fromId+"_"+msg.fileName;
+        if(!incomingFiles[key]) incomingFiles[key]={chunks:[], total:msg.totalChunks, received:0, fileType: msg.fileType};
+        incomingFiles[key].chunks[msg.chunkIndex]=new Uint8Array(msg.data);
+        incomingFiles[key].received++;
+
+        if(incomingFiles[key].received===msg.totalChunks){
+            const fileData = incomingFiles[key];
+            const blob = new Blob(fileData.chunks,{type:fileData.fileType});
+            delete incomingFiles[key];
+            const url = URL.createObjectURL(blob);
+
+            const a=document.createElement("a");
+            a.href=url;
+            a.download=msg.fileName;
+            a.innerText="Download "+msg.fileName;
+            a.className="download-link";
+            document.querySelector(".main-container").appendChild(a);
+        }
+    }
+</script>
+
+</body>
+</html>
