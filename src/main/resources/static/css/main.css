@@ -2,8 +2,8 @@
 /* GLOBAL / BODY */
 /* -------------------------- */
 body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    background: #e0f7ff;
+    font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: linear-gradient(160deg, #e0f7ff 0%, #ffffff 100%);
     margin: 0;
     padding: 0;
     min-height: 100vh;
@@ -11,118 +11,13 @@ body {
     overflow-x: hidden;
 }
 
-.main-container {
-    max-width: 900px;
-    margin: 100px auto 40px auto;
-    padding: 0 20px;
-}
-
-/* -------------------------- */
-/* NAVBAR */
-/* -------------------------- */
-.navbar-glass {
-    backdrop-filter: blur(12px) saturate(180%);
-    background-color: rgba(255, 255, 255, 0.7);
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-}
-
-.navbar-logo {
-    width: 36px;
-    height: 36px;
-    margin-right: 8px;
-}
-
-/* -------------------------- */
-/* PANELS / GLASS EFFECT */
-/* -------------------------- */
-.panel {
-    margin-bottom: 20px;
-    padding: 20px;
-    border-radius: 16px;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.05);
-    position: relative;
-}
-
-.glass-panel {
-    background: rgba(255, 255, 255, 0.6);
-    backdrop-filter: blur(12px) saturate(180%);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-}
-
-/* -------------------------- */
-/* FILE LIST / PROGRESS BARS */
-/* -------------------------- */
-.file-item {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 10px;
-    gap: 8px;
-}
-
-.file-item progress {
-    width: 60%;
-    height: 18px;
-    border-radius: 8px;
-    appearance: none;
-    overflow: hidden;
-    position: relative;
-}
-
-.file-item progress::-webkit-progress-bar {
-    background: #ddd;
-    border-radius: 8px;
-}
-
-.file-item progress::-webkit-progress-value {
-    background: #00aaff;
-    border-radius: 8px;
-    transition: width 0.2s;
-}
-
-.file-item span {
-    min-width: 60px;
-    font-size: 0.9em;
-}
-
-#fileList .btn-sky {
-    background-color: #00aaff;
-    color: white;
-    border: none;
-}
-
-#fileList .btn-sky:hover {
-    background-color: #0072ff;
-}
-
-/* Percentage label inside progress bar */
-.file-item #percent {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    color: #fff;
-    font-weight: bold;
-    font-size: 0.8em;
-}
-
-/* -------------------------- */
-/* FOOTER */
-/* -------------------------- */
-footer {
-    margin-top: 50px;
-    padding: 20px;
-    font-size: 0.9em;
-}
-
-/* -------------------------- */
-/* RADAR BACKDROP */
-/* -------------------------- */
+/* RADAR / DEPTH BACKDROP */
 body::before {
     content: "";
     position: fixed;
     top: 0; left: 0; right: 0; bottom: 0;
-    background: radial-gradient(circle at center, rgba(0,170,255,0.15) 0%, transparent 70%);
-    animation: radar 6s linear infinite;
+    background: radial-gradient(circle at center, rgba(0,170,255,0.08) 0%, transparent 70%);
+    animation: radar 8s linear infinite;
     z-index: -1;
 }
 
@@ -132,23 +27,299 @@ body::before {
 }
 
 /* -------------------------- */
-/* RESPONSIVE INPUTS AND BUTTONS */
+/* NAVBAR */
 /* -------------------------- */
-input[type="text"], input[type="file"] {
+.navbar-glass {
+    backdrop-filter: blur(20px) saturate(180%);
+    background-color: rgba(255, 255, 255, 0.55);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+}
+
+.navbar-logo {
+    width: 36px;
+    height: 36px;
+}
+
+/* Navbar brand title - modern, stylish, bold */
+.navbar-title {
+    font-family: 'Poppins', 'SF Pro Display', sans-serif;
+    font-weight: 800;
+    font-size: 1.6rem;
+    letter-spacing: 1px;
+    color: #0072ff;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+}
+
+/* Animation glow for active transfer */
+.brand-transfer-active {
+    animation: brand-glow 1.5s infinite alternate;
+}
+
+@keyframes brand-glow {
+    0% {
+        text-shadow: 0 0 5px #00aaff, 0 0 10px #0072ff, 0 0 20px #00c0ff;
+        transform: scale(1);
+    }
+    50% {
+        text-shadow: 0 0 10px #00c0ff, 0 0 20px #0072ff, 0 0 30px #00aaff;
+        transform: scale(1.05);
+    }
+    100% {
+        text-shadow: 0 0 5px #00aaff, 0 0 10px #0072ff, 0 0 20px #00c0ff;
+        transform: scale(1);
+    }
+}
+.navbar-brand:hover .navbar-title {
+    color: #00aaff;
+    transform: scale(1.05);
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+
+
+.navbar-nav .nav-link {
+    font-weight: 500;
+    color: #0072ff;
+    transition: all 0.3s ease;
+}
+
+.navbar-nav .nav-link:hover {
+    color: #00aaff;
+    transform: translateY(-2px);
+}
+
+.navbar-toggler {
+    position: relative;
+    width: 36px;
+    height: 36px;
+}
+
+.navbar-toggler .hamburger {
+    display: block;
     width: 100%;
-    border-radius: 12px;
-    border: 1px solid #ccc;
-    padding: 8px 12px;
-    margin-bottom: 8px;
+    height: 3px;
+    background: #0072ff;
+    border-radius: 3px;
+    position: relative;
+    transition: all 0.4s ease;
 }
 
-button {
-    border-radius: 12px;
+.navbar-toggler .hamburger::before,
+.navbar-toggler .hamburger::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 3px;
+    background: #0072ff;
+    border-radius: 3px;
+    transition: all 0.4s ease;
+}
+
+.navbar-toggler .hamburger::before { top: -10px; }
+.navbar-toggler .hamburger::after { bottom: -10px; }
+
+/* -------------------------- */
+/* MAIN PANEL / GLASS EFFECT */
+/* -------------------------- */
+.panel {
+    margin-bottom: 20px;
+    padding: 30px 25px;
+    border-radius: 24px;
+    box-shadow: 0 12px 36px rgba(0,0,0,0.08);
+    position: relative;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.panel:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 16px 48px rgba(0,0,0,0.12);
+}
+
+.glass-panel {
+    background: rgba(255, 255, 255, 0.45);
+    backdrop-filter: blur(24px) saturate(200%);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+/* Highlighted ID */
+.focused-id {
+    display: inline-block;
+    padding: 6px 16px;
+    border-radius: 16px;
+    font-weight: 600;
+    font-size: 1rem;
+    background: rgba(0,170,255,0.15); /* subtle blue glass */
+    backdrop-filter: blur(12px) saturate(180%);
+    border: 1px solid rgba(0,170,255,0.4);
+    color: #0072ff;
+    box-shadow: 0 4px 16px rgba(0,170,255,0.25);
+    transition: all 0.3s ease;
+}
+
+.focused-id:hover {
+    background: rgba(0,170,255,0.25);
+    box-shadow: 0 6px 20px rgba(0,170,255,0.35);
+}
+
+/* Highlighted Status */
+.highlighted-status {
+    display: inline-block;
+    padding: 6px 16px;
+    border-radius: 16px;
+    font-weight: 600;
+    font-size: 1rem;
+    background: rgba(0,255,85,0.15); /* greenish glass for connected */
+    backdrop-filter: blur(12px) saturate(180%);
+    border: 1px solid rgba(0,255,85,0.4);
+    color: #00cc44;
+    box-shadow: 0 4px 16px rgba(0,255,85,0.25);
+    transition: all 0.3s ease;
+}
+
+.highlighted-status.connecting {
+    background: rgba(255,170,0,0.15); /* yellow for connecting */
+    border-color: rgba(255,170,0,0.4);
+    color: #ffaa00;
+    box-shadow: 0 4px 16px rgba(255,170,0,0.25);
+}
+
+/* Optional: smooth color change when status updates */
+#status {
+    transition: all 0.3s ease;
 }
 
 /* -------------------------- */
-/* MOBILE / TABLET ADJUSTMENTS */
+/* INPUT CONTAINER ENHANCED */
 /* -------------------------- */
+.input-container {
+    position: relative;
+}
+
+.input-container input[type="text"],
+.input-container input[type="file"] {
+    width: 100%;
+    border-radius: 16px;
+    border: none;
+    padding: 14px 16px;
+    font-size: 1rem;
+    outline: none;
+    background: rgba(255,255,255,0.3);
+    backdrop-filter: blur(12px);
+    transition: all 0.3s ease;
+    color: #333;
+}
+
+.input-container input[type="text"]:hover {
+    background: rgba(255,255,255,0.5);
+}
+
+.input-container input[type="text"]:focus {
+    box-shadow: 0 0 12px rgba(0,170,255,0.4);
+}
+
+/* FILE INPUT CUSTOM */
+.file-container {
+    position: relative;
+}
+
+.file-container input[type="file"] {
+    opacity: 0;
+    z-index: 2;
+    cursor: pointer;
+}
+
+.file-container .file-placeholder {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 14px 16px;
+    color: #555;
+    font-weight: 500;
+    border-radius: 16px;
+    background: rgba(255,255,255,0.2);
+    backdrop-filter: blur(8px);
+    transition: all 0.3s ease;
+}
+
+.file-container:hover .file-placeholder {
+    background: rgba(255,255,255,0.35);
+}
+
+/* -------------------------- */
+/* BUTTONS MODERN UI */
+.btn-modern {
+    padding: 10px 24px;
+    font-weight: 600;
+    font-size: 1rem;
+    border-radius: 16px;
+    transition: all 0.3s ease;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+}
+
+.btn-modern:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 28px rgba(0,0,0,0.12);
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #00aaff, #0072ff);
+    border: none;
+    color: white;
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, #0072ff, #00aaff);
+}
+
+/* -------------------------- */
+/* FILE LIST / PROGRESS BARS */
+.file-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    gap: 10px;
+}
+
+.file-item progress {
+    width: 60%;
+    height: 18px;
+    border-radius: 12px;
+    appearance: none;
+    overflow: hidden;
+    position: relative;
+}
+
+.file-item progress::-webkit-progress-bar {
+    background: #e0e0e0;
+    border-radius: 12px;
+}
+
+.file-item progress::-webkit-progress-value {
+    background: #00aaff;
+    border-radius: 12px;
+    transition: width 0.3s ease;
+}
+
+/* -------------------------- */
+/* FOOTER */
+footer {
+    margin-top: 50px;
+    padding: 20px;
+    font-size: 0.9em;
+    color: #555;
+}
+
+/* -------------------------- */
+/* RESPONSIVE */
 @media (max-width: 768px) {
     .file-item {
         flex-direction: column;
@@ -156,5 +327,277 @@ button {
     }
     .file-item progress {
         width: 100%;
+    }
+}
+/* -------------------------- */
+/* SINGLE UNIFIED CARD SECTION */
+/* -------------------------- */
+.panel-section-container {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+
+.unified-card {
+    position: relative;
+    width: 100%;
+    max-width: 900px;
+    border-radius: 24px;
+    padding: 30px 25px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.12);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid rgba(255,255,255,0.3);
+
+    overflow: hidden;
+}
+
+.unified-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 25px 70px rgba(0,0,0,0.15);
+}
+
+/* Section titles with gradient */
+.unified-card .section-title {
+    background: linear-gradient(90deg, #00aaff, #0072ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 700;
+    font-size: 1.3rem;
+    margin-bottom: 16px;
+}
+
+/* Connect inline wrapper */
+/* Taller input for Connect to Device */
+.connect-inline-wrapper .form-control-sm {
+    max-width: 250px;
+    border-radius: 16px;
+    padding: 14px 16px;        /* increase vertical padding for height */
+    font-size: 1rem;           /* slightly larger text */
+    line-height: 1.4;          /* vertically centers text */
+    display: flex;
+    align-items: center;        /* vertical center for text inside */
+    backdrop-filter: blur(12px);
+    background: rgba(255,255,255,0.25);
+    border: 1px solid rgba(255,255,255,0.3);
+    transition: all 0.3s ease;
+    height: 50px;              /* explicit height (optional) */
+}
+
+.connect-inline-wrapper .form-control-sm:focus {
+    box-shadow: 0 0 12px rgba(0,170,255,0.4);
+    background: rgba(255,255,255,0.35);
+}
+
+.connect-inline-wrapper .btn-modern {
+    padding: 14px 22px;   /* match the input height */
+    font-size: 1rem;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;  /* vertical center button text */
+}
+
+
+.connect-inline-wrapper .d-flex {
+    margin-top: 12px;
+}
+
+/* Send files wrapper */
+.send-files-wrapper .file-container .file-placeholder {
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(12px);
+    border-radius: 16px;
+    padding: 14px 16px;
+    transition: all 0.3s ease;
+
+}
+
+
+.send-files-wrapper .file-container:hover .file-placeholder {
+    background: rgba(255,255,255,0.25);
+}
+
+.send-files-wrapper .btn-sky {
+    background: linear-gradient(135deg, #00aaff, #0072ff);
+    color: white;
+    font-weight: 600;
+}
+
+.send-files-wrapper .btn-sky:hover {
+    background: linear-gradient(135deg, #0072ff, #00aaff);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 28px rgba(0,0,0,0.12);
+}
+
+/* File list progress bars inside card */
+.send-files-wrapper #fileList .file-item progress::-webkit-progress-value {
+    background: #00aaff;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .connect-inline-wrapper .d-flex {
+        flex-direction: column;
+        gap: 8px;
+    }
+    .connect-inline-wrapper .form-control-sm {
+        max-width: 100%;
+    }
+}
+/* File card container with background image */
+.file-card {
+    position: relative;
+    border-radius: 24px;
+    background:
+            linear-gradient(rgba(255,255,255,0.25), rgba(255,255,255,0.25)), /* glass overlay */
+            url('/img/filebg.png') no-repeat center center; /* background image */
+    background-size: cover;
+    backdrop-filter: blur(18px) saturate(180%);
+    border: 1px solid rgba(255,255,255,0.3);
+    box-shadow: 0 16px 48px rgba(0,0,0,0.08);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 260px; /* taller card */
+    gap: 16px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden;
+}
+
+.file-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.12);
+}
+
+/* File placeholder styling */
+.file-placeholder {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #000000cc;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px; /* space between icon and text */
+    width: 90%;
+    max-width: 400px;
+    margin: 16px auto 0 auto;
+    height: 60px;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.25); /* light glass background */
+    backdrop-filter: blur(12px) saturate(180%);
+    padding: 0 16px;
+    z-index: 2;
+    transition: all 0.3s ease;
+}
+
+/* Folder icon */
+.folder-icon {
+    display: inline-block;
+    width: 28px;
+    height: 24px;
+    border-radius: 4px;
+    background: linear-gradient(135deg, rgba(255,255,255,0.5), rgba(255,255,255,0.2));
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    position: relative;
+}
+
+/* Optional: folder tab on top */
+.folder-icon::before {
+    content: '';
+    position: absolute;
+    top: -6px;
+    left: 4px;
+    width: 16px;
+    height: 6px;
+    border-radius: 2px 2px 0 0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.6), rgba(255,255,255,0.3));
+}
+
+/* Input file clickable but invisible behind placeholder */
+.file-card input[type="file"] {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+    z-index: 1;
+}
+
+/* Send button fixed at bottom and centered */
+.file-card .send-btn {
+    position: absolute;
+    bottom: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    padding: 12px 28px;
+    border-radius: 16px;
+    font-weight: 600;
+    background: linear-gradient(135deg, #00aaff, #0072ff);
+    color: #fff;
+    transition: all 0.3s ease;
+}
+
+.file-card .send-btn:hover {
+    background: linear-gradient(135deg, #0072ff, #00aaff);
+    transform: translateX(-50%) translateY(-2px);
+    box-shadow: 0 10px 28px rgba(0,0,0,0.12);
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+    .file-card {
+        min-height: 220px;
+        padding: 16px;
+    }
+
+    .file-card .send-btn {
+        bottom: 12px;
+        padding: 10px 24px;
+    }
+
+    .file-placeholder {
+        width: 95%;     /* almost full width on mobile */
+        height: 50px;   /* slightly smaller height */
+        font-size: 0.95rem;
+    }
+}
+/* Brand / Hero Heading */
+.brand-heading {
+    font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-weight: 800;                    /* extra bold for emphasis */
+    font-size: 2.2rem;                   /* big, adjust for responsiveness */
+    background: linear-gradient(90deg, #00aaff, #0072ff); /* modern gradient */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-align: center;
+    margin-bottom: 12px;
+    position: relative;
+    z-index: 1;
+
+    /* subtle glass glow */
+    text-shadow: 0 4px 12px rgba(0, 170, 255, 0.3);
+    transition: all 0.4s ease;
+}
+
+.brand-heading:hover {
+    transform: scale(1.05);               /* subtle hover pop */
+    text-shadow: 0 6px 20px rgba(0, 170, 255, 0.45);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .brand-heading {
+        font-size: 1.8rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .brand-heading {
+        font-size: 1.5rem;
     }
 }
