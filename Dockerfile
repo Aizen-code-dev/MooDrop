@@ -1,37 +1,41 @@
 # ----------------------------
 # Stage 1: Build with MS OpenJDK 21 + Maven
 # ----------------------------
-FROM mcr.microsoft.com/openjdk/jdk:21 AS build
+FROM mcr.microsoft.com/openjdk/jdk:21-ubuntu AS build
 
+# Set working directory
 WORKDIR /app
 
-# Install Maven
+# Install Maven (latest stable)
 RUN apt-get update && \
-    apt-get install -y maven git curl && \
+    apt-get install -y maven git && \
     rm -rf /var/lib/apt/lists/*
 
-# Copy pom.xml first to cache dependencies
+# Copy pom.xml first to leverage Docker cache
 COPY pom.xml .
+
+# Download dependencies only
 RUN mvn dependency:go-offline -B
 
-# Copy all source code
+# Copy the rest of the source code
 COPY src ./src
 
-# Build Spring Boot jar
+# Build the Spring Boot JAR (skip tests)
 RUN mvn clean package -DskipTests
 
 # ----------------------------
-# Stage 2: Runtime
+# Stage 2: Runtime with MS OpenJDK 21 (smaller image)
 # ----------------------------
-FROM mcr.microsoft.com/openjdk/jdk:21
+FROM mcr.microsoft.com/openjdk/jdk:21-ubuntu
 
+# Set working directory
 WORKDIR /app
 
-# Copy jar from build stage
+# Copy the built JAR from the build stage
 COPY --from=build /app/target/*.jar app.jar
 
-# Expose Spring Boot default port
+# Expose port 8080
 EXPOSE 8080
 
 # Run the Spring Boot app
-ENTRYPOINT ["java", "-jar", "app.jar"]
+ENTRYPOINT ["java","-jar","app.jar"]
