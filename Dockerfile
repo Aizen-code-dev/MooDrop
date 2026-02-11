@@ -1,12 +1,14 @@
 # ----------------------------
-# Stage 1: Build with Maven + MS OpenJDK 21
+# Stage 1: Build with MS OpenJDK 21 + Maven
 # ----------------------------
-FROM maven:3.9.3-eclipse-temurin-21 AS build
-# NOTE: Maven official image already has Java, but we can override if needed
-# If you specifically want MS OpenJDK 21 in build, use: mcr.microsoft.com/openjdk/jdk:21-focal
-# Maven needs Java, so ensure JDK installed
+FROM mcr.microsoft.com/openjdk/jdk:21 AS build
 
 WORKDIR /app
+
+# Install Maven
+RUN apt-get update && \
+    apt-get install -y maven git curl && \
+    rm -rf /var/lib/apt/lists/*
 
 # Copy pom.xml first to cache dependencies
 COPY pom.xml .
@@ -19,17 +21,17 @@ COPY src ./src
 RUN mvn clean package -DskipTests
 
 # ----------------------------
-# Stage 2: Runtime with MS OpenJDK 21
+# Stage 2: Runtime
 # ----------------------------
-FROM mcr.microsoft.com/openjdk/jdk:21-focal
+FROM mcr.microsoft.com/openjdk/jdk:21
 
 WORKDIR /app
 
-# Copy the jar from build stage
+# Copy jar from build stage
 COPY --from=build /app/target/*.jar app.jar
 
 # Expose Spring Boot default port
 EXPOSE 8080
 
-# Run the jar
+# Run the Spring Boot app
 ENTRYPOINT ["java", "-jar", "app.jar"]
