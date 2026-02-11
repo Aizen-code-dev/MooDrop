@@ -1,204 +1,160 @@
-/* ============================= */
-/* GLOBAL STYLES */
-/* ============================= */
+/* -------------------------- */
+/* GLOBAL / BODY */
+/* -------------------------- */
 body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-    background: linear-gradient(160deg, #eaf6ff, #ffffff);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: #e0f7ff;
     margin: 0;
     padding: 0;
-    color: #333;
+    min-height: 100vh;
+    position: relative;
     overflow-x: hidden;
 }
 
-h2, h3 {
-    color: #0072ff;
+.main-container {
+    max-width: 900px;
+    margin: 100px auto 40px auto;
+    padding: 0 20px;
 }
 
-/* ============================= */
-/* GLASS PANELS */
-/* ============================= */
-.glass-panel {
-    background: rgba(255, 255, 255, 0.55);
-    backdrop-filter: blur(12px) saturate(180%);
-    -webkit-backdrop-filter: blur(12px) saturate(180%);
-    border-radius: 16px;
-    padding: 20px;
-    margin: 20px auto;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-}
-
-/* ============================= */
+/* -------------------------- */
 /* NAVBAR */
-/* ============================= */
+/* -------------------------- */
 .navbar-glass {
-    background: rgba(255, 255, 255, 0.6);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border-bottom: 1px solid rgba(0, 114, 255, 0.2);
+    backdrop-filter: blur(12px) saturate(180%);
+    background-color: rgba(255, 255, 255, 0.7);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
 }
 
 .navbar-logo {
     width: 36px;
     height: 36px;
-    margin-right: 10px;
+    margin-right: 8px;
 }
 
-.navbar-nav .nav-link {
-    color: #0072ff !important;
-    font-weight: 500;
-    margin-left: 10px;
+/* -------------------------- */
+/* PANELS / GLASS EFFECT */
+/* -------------------------- */
+.panel {
+    margin-bottom: 20px;
+    padding: 20px;
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.05);
+    position: relative;
 }
 
-.navbar-nav .nav-link:hover {
-    text-decoration: underline;
+.glass-panel {
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(12px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
-/* ============================= */
-/* BUTTONS */
-/* ============================= */
-.btn-primary {
-    background: #0072ff;
-    border: none;
-    border-radius: 12px;
-    padding: 8px 16px;
-    transition: 0.2s;
-}
-
-.btn-primary:hover {
-    background: #005ec2;
-}
-
-.btn-sky {
-    background: #00c0ff;
-    color: white;
-    border: none;
-    border-radius: 12px;
-    padding: 8px 16px;
-    transition: 0.2s;
-}
-
-.btn-sky:hover {
-    background: #0099cc;
-}
-
-/* ============================= */
-/* FILE LIST & PROGRESS */
-/* ============================= */
+/* -------------------------- */
+/* FILE LIST / PROGRESS BARS */
+/* -------------------------- */
 .file-item {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 12px;
-    padding: 8px 12px;
-    border-radius: 12px;
-    background: rgba(255, 255, 255, 0.35);
-    backdrop-filter: blur(8px);
-}
-
-.file-item span {
-    flex: 1;
-    margin-right: 10px;
-    font-weight: 500;
-    overflow-wrap: anywhere;
+    margin-bottom: 10px;
+    gap: 8px;
 }
 
 .file-item progress {
-    flex: 2;
-    height: 12px;
-    border-radius: 6px;
-    margin-right: 10px;
-}
-
-.file-item a.btn-sky {
-    flex-shrink: 0;
-}
-
-/* ============================= */
-/* MAIN CONTAINER */
-/* ============================= */
-.main-container {
-    max-width: 900px;
-    margin: 100px auto 40px;
-    padding: 0 20px;
-}
-
-/* ============================= */
-/* INFO SECTIONS */
-/* ============================= */
-#howItWorks, #security {
-    max-width: 850px;
-    margin: 20px auto;
-}
-
-#howItWorks ul, #security ul {
-    list-style: disc inside;
-    line-height: 1.6;
-}
-
-/* ============================= */
-/* FOOTER */
-/* ============================= */
-footer {
-    padding: 20px;
-    margin-top: 40px;
-    color: #0072ff;
-    font-weight: 500;
-}
-
-/* ============================= */
-/* RADAR EFFECT BACKDROP */
-/* ============================= */
-.radar-backdrop {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    width: 200px;
-    height: 200px;
-    border-radius: 50%;
-    background: rgba(0, 114, 255, 0.1);
-    box-shadow: 0 0 60px rgba(0, 114, 255, 0.3);
+    width: 60%;
+    height: 18px;
+    border-radius: 8px;
+    appearance: none;
     overflow: hidden;
-    z-index: 1;
+    position: relative;
 }
 
-.radar-backdrop::before {
-    content: '';
+.file-item progress::-webkit-progress-bar {
+    background: #ddd;
+    border-radius: 8px;
+}
+
+.file-item progress::-webkit-progress-value {
+    background: #00aaff;
+    border-radius: 8px;
+    transition: width 0.2s;
+}
+
+.file-item span {
+    min-width: 60px;
+    font-size: 0.9em;
+}
+
+#fileList .btn-sky {
+    background-color: #00aaff;
+    color: white;
+    border: none;
+}
+
+#fileList .btn-sky:hover {
+    background-color: #0072ff;
+}
+
+/* Percentage label inside progress bar */
+.file-item #percent {
     position: absolute;
-    top: 50%;
     left: 50%;
-    width: 200%;
-    height: 200%;
-    background: radial-gradient(circle, rgba(0, 114, 255, 0.2) 10%, transparent 70%);
-    border-radius: 50%;
-    transform: translate(-50%, -50%) scale(0);
-    animation: radarWave 2s infinite;
+    transform: translateX(-50%);
+    color: #fff;
+    font-weight: bold;
+    font-size: 0.8em;
 }
 
-@keyframes radarWave {
-    0% { transform: translate(-50%, -50%) scale(0); opacity: 0.8; }
-    50% { opacity: 0.4; }
-    100% { transform: translate(-50%, -50%) scale(1); opacity: 0; }
+/* -------------------------- */
+/* FOOTER */
+/* -------------------------- */
+footer {
+    margin-top: 50px;
+    padding: 20px;
+    font-size: 0.9em;
 }
 
-/* ============================= */
-/* RESPONSIVE */
+/* -------------------------- */
+/* RADAR BACKDROP */
+/* -------------------------- */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: radial-gradient(circle at center, rgba(0,170,255,0.15) 0%, transparent 70%);
+    animation: radar 6s linear infinite;
+    z-index: -1;
+}
+
+@keyframes radar {
+    0% { background-position: center; }
+    100% { background-position: 100% 100%; }
+}
+
+/* -------------------------- */
+/* RESPONSIVE INPUTS AND BUTTONS */
+/* -------------------------- */
+input[type="text"], input[type="file"] {
+    width: 100%;
+    border-radius: 12px;
+    border: 1px solid #ccc;
+    padding: 8px 12px;
+    margin-bottom: 8px;
+}
+
+button {
+    border-radius: 12px;
+}
+
+/* -------------------------- */
+/* MOBILE / TABLET ADJUSTMENTS */
+/* -------------------------- */
 @media (max-width: 768px) {
-    .main-container {
-        margin: 120px 10px 20px;
-    }
-
-    .navbar-nav {
-        text-align: center;
-        margin-top: 10px;
-    }
-
     .file-item {
         flex-direction: column;
         align-items: flex-start;
     }
-
-    .file-item progress, .file-item a.btn-sky {
+    .file-item progress {
         width: 100%;
-        margin: 4px 0;
     }
 }
