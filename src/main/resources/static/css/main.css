@@ -309,14 +309,6 @@ body::before {
     transition: width 0.3s ease;
 }
 
-/* -------------------------- */
-/* FOOTER */
-footer {
-    margin-top: 50px;
-    padding: 20px;
-    font-size: 0.9em;
-    color: #555;
-}
 
 /* -------------------------- */
 /* RESPONSIVE */
@@ -600,4 +592,190 @@ footer {
     .brand-heading {
         font-size: 1.5rem;
     }
+}
+/* INFO CARD */
+.info-card {
+    max-width: 800px;
+    margin: 30px auto; /* center horizontally */
+    padding: 30px 25px;
+    border-radius: 24px;
+    background: rgba(255,255,255,0.25);
+    backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid rgba(255,255,255,0.3);
+    box-shadow: 0 16px 48px rgba(0,0,0,0.08);
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.info-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 25px 60px rgba(0,0,0,0.12);
+}
+
+/* Stylish Section Titles */
+.info-card .section-title {
+    font-family: 'SF Pro Display', 'Segoe UI', sans-serif;
+    font-weight: 800;
+    font-size: 2rem;
+    margin-bottom: 20px;
+    background: linear-gradient(90deg, #00aaff, #0072ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+/* Info text */
+.info-card .info-text {
+    font-size: 1rem;
+    color: #111;
+    margin: 16px auto;
+    line-height: 1.6;
+    max-width: 700px;
+}
+
+/* Info list */
+.info-card .info-list {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+    text-align: left;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.info-card .info-list li {
+    font-size: 1rem;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 12px;
+    border-radius: 12px;
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(12px);
+    transition: all 0.3s ease;
+}
+
+.info-card .info-list li:hover {
+    background: rgba(255,255,255,0.25);
+}
+
+/* Icons in list items */
+.info-card .info-list li::before {
+    content: '';
+    display: inline-block;
+    width: 0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .info-card {
+        padding: 20px 16px;
+    }
+    .info-card .section-title {
+        font-size: 1.5rem;
+    }
+    .info-card .info-text,
+    .info-card .info-list li {
+        font-size: 0.95rem;
+    }
+}
+.other-projects-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.project-link {
+    text-decoration: none;
+}
+
+.project-card {
+    padding: 16px 20px;
+    border-radius: 16px;
+    background: rgba(255,255,255,0.3);
+    backdrop-filter: blur(16px) saturate(180%);
+    font-weight: 600;
+    font-size: 1.05rem;
+    color: #0072ff;
+    transition: all 0.3s ease;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+}
+
+.project-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 28px rgba(0,0,0,0.12);
+    background: rgba(255,255,255,0.45);
+}
+
+/* -------------------------- */
+/* FOOTER */
+.footer-panel {
+    padding: 30px 20px;
+    border-radius: 24px;
+    backdrop-filter: blur(20px) saturate(180%);
+    background: rgba(255,255,255,0.3);
+    border: 1px solid rgba(255,255,255,0.25);
+    box-shadow: 0 16px 48px rgba(0,0,0,0.08);
+    text-align: center;
+}
+
+.footer-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    background: linear-gradient(90deg, #00aaff, #0072ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 8px;
+}
+
+.footer-subtitle {
+    font-size: 1rem;
+    font-weight: 500;
+    color: #333;
+    margin-bottom: 16px;
+}
+
+.footer-links a {
+    color: #0072ff;
+    font-weight: 500;
+    text-decoration: none;
+    margin: 0 6px;
+    transition: all 0.3s ease;
+}
+
+.footer-links a:hover {
+    color: #00aaff;
+    text-decoration: underline;
+}
+
+.btn-youtube {
+    background: #FF0000;
+    color: #fff;
+    padding: 10px 22px;
+    font-weight: 600;
+    border-radius: 16px;
+    transition: all 0.3s ease;
+}
+
+.btn-youtube:hover {
+    background: #cc0000;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 28px rgba(0,0,0,0.12);
+}
+
+.footer-socials p {
+    font-size: 0.85rem;
+    color: #555;
+    margin-top: 12px;
+}
+.footer-socials a {
+    color: #0072ff;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+.footer-socials a:hover {
+    color: #00aaff;
+    text-decoration: underline;
 }
