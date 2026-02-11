@@ -1,0 +1,204 @@
+/* ============================= */
+/* GLOBAL STYLES */
+/* ============================= */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+    background: linear-gradient(160deg, #eaf6ff, #ffffff);
+    margin: 0;
+    padding: 0;
+    color: #333;
+    overflow-x: hidden;
+}
+
+h2, h3 {
+    color: #0072ff;
+}
+
+/* ============================= */
+/* GLASS PANELS */
+/* ============================= */
+.glass-panel {
+    background: rgba(255, 255, 255, 0.55);
+    backdrop-filter: blur(12px) saturate(180%);
+    -webkit-backdrop-filter: blur(12px) saturate(180%);
+    border-radius: 16px;
+    padding: 20px;
+    margin: 20px auto;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+/* ============================= */
+/* NAVBAR */
+/* ============================= */
+.navbar-glass {
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(0, 114, 255, 0.2);
+}
+
+.navbar-logo {
+    width: 36px;
+    height: 36px;
+    margin-right: 10px;
+}
+
+.navbar-nav .nav-link {
+    color: #0072ff !important;
+    font-weight: 500;
+    margin-left: 10px;
+}
+
+.navbar-nav .nav-link:hover {
+    text-decoration: underline;
+}
+
+/* ============================= */
+/* BUTTONS */
+/* ============================= */
+.btn-primary {
+    background: #0072ff;
+    border: none;
+    border-radius: 12px;
+    padding: 8px 16px;
+    transition: 0.2s;
+}
+
+.btn-primary:hover {
+    background: #005ec2;
+}
+
+.btn-sky {
+    background: #00c0ff;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    padding: 8px 16px;
+    transition: 0.2s;
+}
+
+.btn-sky:hover {
+    background: #0099cc;
+}
+
+/* ============================= */
+/* FILE LIST & PROGRESS */
+/* ============================= */
+.file-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    padding: 8px 12px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.35);
+    backdrop-filter: blur(8px);
+}
+
+.file-item span {
+    flex: 1;
+    margin-right: 10px;
+    font-weight: 500;
+    overflow-wrap: anywhere;
+}
+
+.file-item progress {
+    flex: 2;
+    height: 12px;
+    border-radius: 6px;
+    margin-right: 10px;
+}
+
+.file-item a.btn-sky {
+    flex-shrink: 0;
+}
+
+/* ============================= */
+/* MAIN CONTAINER */
+/* ============================= */
+.main-container {
+    max-width: 900px;
+    margin: 100px auto 40px;
+    padding: 0 20px;
+}
+
+/* ============================= */
+/* INFO SECTIONS */
+/* ============================= */
+#howItWorks, #security {
+    max-width: 850px;
+    margin: 20px auto;
+}
+
+#howItWorks ul, #security ul {
+    list-style: disc inside;
+    line-height: 1.6;
+}
+
+/* ============================= */
+/* FOOTER */
+/* ============================= */
+footer {
+    padding: 20px;
+    margin-top: 40px;
+    color: #0072ff;
+    font-weight: 500;
+}
+
+/* ============================= */
+/* RADAR EFFECT BACKDROP */
+/* ============================= */
+.radar-backdrop {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background: rgba(0, 114, 255, 0.1);
+    box-shadow: 0 0 60px rgba(0, 114, 255, 0.3);
+    overflow: hidden;
+    z-index: 1;
+}
+
+.radar-backdrop::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(0, 114, 255, 0.2) 10%, transparent 70%);
+    border-radius: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    animation: radarWave 2s infinite;
+}
+
+@keyframes radarWave {
+    0% { transform: translate(-50%, -50%) scale(0); opacity: 0.8; }
+    50% { opacity: 0.4; }
+    100% { transform: translate(-50%, -50%) scale(1); opacity: 0; }
+}
+
+/* ============================= */
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .main-container {
+        margin: 120px 10px 20px;
+    }
+
+    .navbar-nav {
+        text-align: center;
+        margin-top: 10px;
+    }
+
+    .file-item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .file-item progress, .file-item a.btn-sky {
+        width: 100%;
+        margin: 4px 0;
+    }
+}
