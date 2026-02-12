@@ -23,6 +23,10 @@
             <img th:src="@{img/moodrop.ico}" class="navbar-logo me-2">
             <span class="navbar-title" id="brandTitle">MooDrop</span>
         </a>
+        <!-- CENTER: Clock -->
+        <div class="navbar-clock">
+            <span id="liveClock"></span>
+        </div>
 
         <button class="navbar-toggler shadow-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
             <span class="navbar-toggler-icon hamburger"></span>
@@ -67,21 +71,31 @@
 
             <!-- SEND FILES SECTION -->
             <div class="send-files-wrapper">
-                <h3 class="section-title">Send Files</h3>
-
                 <div class="file-card">
+                    <!-- File input -->
                     <label class="file-placeholder">
                         <span class="folder-icon"></span>
                         <span class="placeholder-text">Choose files</span>
-                        <input type="file" id="fileInput" multiple> <!-- click works anywhere -->
-                    </label>
-                    <button class="btn btn-sky btn-modern send-btn" onclick="sendSelectedFiles()">Send Selected</button>
-                </div>
+                        <input type="file" id="fileInput" multiple>
 
-                <div id="fileList"></div>
+                    </label>
+
+
+                    <!-- This is where the file items will appear -->
+                    <div id="fileList"></div>
+                    <!-- Send button -->
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-center mt-3">
+                <button class="btn btn-sky btn-primary btn-modern send-btn"
+                        onclick="sendSelectedFiles()">
+                    Send Selected
+                </button>
             </div>
 
         </div>
+
     </section>
 
     <!-- INFO -->
@@ -139,10 +153,24 @@
         <h3 class="section-title">Other Projects</h3>
 
         <ul class="info-list">
-            <li>🌐 <strong>Anichan Online:</strong> <a href="https://anichan.online" target="_blank">Anime Streaming Website</a></li>
-            <!-- You can add more projects here -->
+            <li>
+                🌐 <strong>Anichan:</strong>
+                <a href="https://anichan.online" target="_blank">
+                    Anime Streaming Website
+                </a>
+            </li>
+
+            <li>
+                🌍 <strong>DNS Lookup Tool:</strong>
+            </li>
+
+            <li>
+                🤖 <strong>Spring AI:</strong>
+            </li>
+
         </ul>
     </section>
+
 
 
 

@@ -82,6 +82,48 @@ body::before {
     cursor: pointer;
 }
 
+/* Center Clock */
+/* iOS Glass Clock - White + Sky Blue */
+.navbar-clock {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+    font-weight: 600;
+    font-size: 0.95rem;
+    letter-spacing: 0.6px;
+    color: #007aff; /* iOS blue */
+
+    padding: 8px 20px;
+    border-radius: 22px;
+
+    /* Glassmorphism */
+    background: linear-gradient(
+            135deg,
+            rgba(255, 255, 255, 0.85),
+            rgba(135, 206, 250, 0.35)
+    );
+
+    backdrop-filter: blur(25px) saturate(200%);
+    -webkit-backdrop-filter: blur(25px) saturate(200%);
+
+    border: 1px solid rgba(255, 255, 255, 0.6);
+
+    box-shadow:
+            0 8px 32px rgba(0, 122, 255, 0.15),
+            inset 0 1px 0 rgba(255, 255, 255, 0.8);
+
+    transition: all 0.3s ease;
+}
+.navbar-clock:hover {
+    transform: translateX(-50%) scale(1.05);
+    box-shadow:
+            0 12px 40px rgba(0, 122, 255, 0.25),
+            inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+
 
 
 .navbar-nav .nav-link {
@@ -459,7 +501,7 @@ body::before {
     min-height: 260px; /* taller card */
     gap: 16px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    overflow: hidden;
+    overflow: visible;
 }
 
 .file-card:hover {
@@ -515,13 +557,17 @@ body::before {
 /* Input file clickable but invisible behind placeholder */
 .file-card input[type="file"] {
     position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    width: 100%;
-    height: 100%;
+    top: 16px;                /* only over choose area */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 400px;
+    height: 60px;             /* same as placeholder */
     opacity: 0;
     cursor: pointer;
-    z-index: 1;
+    z-index: 3;
 }
+
 
 /* Send button fixed at bottom and centered */
 .file-card .send-btn {
@@ -782,4 +828,83 @@ body::before {
 .footer-socials a:hover {
     color: #00aaff;
     text-decoration: underline;
+}
+/* -------------------------- */
+/* FILE LIST CONTAINER */
+/* -------------------------- */
+#fileList {
+    margin-top: 20px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 12px; /* space between files */
+}
+
+/* Individual file item */
+#fileList .file-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 16px;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.25); /* glass effect */
+    backdrop-filter: blur(12px) saturate(180%);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    font-size: 0.95rem;
+    color: #000;
+}
+
+/* Hover effect */
+#fileList .file-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 28px rgba(0,0,0,0.12);
+}
+
+/* File name */
+#fileList .file-item .file-name {
+    flex: 1;
+    margin-right: 12px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* File progress bar */
+#fileList .file-item progress {
+    width: 30%;
+    height: 14px;
+    border-radius: 12px;
+    appearance: none;
+    overflow: hidden;
+}
+
+/* Progress bar styling */
+#fileList .file-item progress::-webkit-progress-bar {
+    background: rgba(255,255,255,0.2);
+    border-radius: 12px;
+}
+
+#fileList .file-item progress::-webkit-progress-value {
+    background: linear-gradient(135deg, #00aaff, #0072ff);
+    border-radius: 12px;
+    transition: width 0.3s ease;
+}
+
+/* Optional: button for download/cancel inside file-item */
+#fileList .file-item button {
+    padding: 6px 14px;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    border: none;
+    background: linear-gradient(135deg, #00aaff, #0072ff);
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+#fileList .file-item button:hover {
+    background: linear-gradient(135deg, #0072ff, #00aaff);
+    transform: translateY(-1px);
 }
