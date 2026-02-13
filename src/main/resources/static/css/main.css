@@ -932,17 +932,18 @@ body::before {
 
 /* Quick links styling */
 .quick-links-list {
-    list-style: none;
-    padding: 0;
-    margin-top: 15px;
+    list-style: none !important;
+    padding-left: 0 !important;
+    margin-left: 0 !important;
 }
 
 .quick-links-list li {
-    margin-bottom: 12px;
+    list-style: none !important;
 }
 
+
 .quick-links-list a {
-    text-decoration: none;
+    text-decoration: none  !important;
     font-weight: 600;
     color: #0072ff;
     transition: all 0.3s ease;
