@@ -908,3 +908,82 @@ body::before {
     background: linear-gradient(135deg, #0072ff, #00aaff);
     transform: translateY(-1px);
 }
+/* -------------------------- */
+/* ABOUT + QUICK LINKS SECTION */
+/* -------------------------- */
+
+.about-links-card {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 40px 30px;
+}
+
+.about-links-wrapper {
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+    align-items: flex-start;
+}
+
+.about-box,
+.quick-links-box {
+    flex: 1;
+}
+
+/* Quick links styling */
+.quick-links-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 15px;
+}
+
+.quick-links-list li {
+    margin-bottom: 12px;
+}
+
+.quick-links-list a {
+    text-decoration: none;
+    font-weight: 600;
+    color: #0072ff;
+    transition: all 0.3s ease;
+}
+
+.quick-links-list a:hover {
+    color: #00aaff;
+    transform: translateX(4px);
+}
+
+/* Divider line (desktop only) */
+.about-box {
+    padding-right: 20px;
+    border-right: 1px solid rgba(255,255,255,0.3);
+}
+
+.quick-links-box {
+    padding-left: 20px;
+}
+
+/* MOBILE FIX FOR ABOUT + QUICK LINKS */
+@media (max-width: 768px) {
+
+    .about-links-wrapper {
+        flex-direction: column !important;
+        text-align: center;
+        align-items: center;
+    }
+
+    .about-box,
+    .quick-links-box {
+        width: 100%;
+        text-align: center;
+    }
+
+    .quick-links-list {
+        padding-left: 0;
+        list-style: none;
+    }
+
+    .quick-links-list li {
+        margin-bottom: 8px;
+    }
+}

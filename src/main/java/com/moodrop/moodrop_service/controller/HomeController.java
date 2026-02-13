@@ -22,5 +22,20 @@ public class HomeController {
 
         return "index";
     }
+    @GetMapping("/about")
+    public String about() {
+        return "about";
+    }
+
+    @GetMapping("/privacy-policy")
+    public String privacy() {
+        return "privacy";
+    }
+
+    @GetMapping("/terms-service")
+    public String terms() {
+        return "terms";
+    }
+
 
 }
