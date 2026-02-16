@@ -33,7 +33,7 @@
 <nav class="navbar navbar-expand-lg navbar-glass fixed-top py-2">
     <div class="container-fluid">
         <a th:href="@{/}" class="navbar-brand d-flex align-items-center">
-            <img th:src="@{img/moodrop.ico}" class="navbar-logo me-2">
+            <img th:src="@{img/moodrop.png}" class="navbar-logo me-2">
             <span class="navbar-title" id="brandTitle">MooDrop</span>
         </a>
         <!-- CENTER: Clock -->
@@ -50,7 +50,7 @@
                 <li class="nav-item"><a class="nav-link" href="#security">Security</a></li>
                 <li class="nav-item"><a class="nav-link" href="#other-projects">Other Projects</a></li>
                 <li class="nav-item"><a class="nav-link" href="#features">Features</a></li>
-                <li class="nav-item"><a class="nav-link" href="#footer">Support</a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/blog}">Blog</a></li>
             </ul>
         </div>
 
@@ -114,50 +114,378 @@
     <!-- INFO -->
     <section id="howItWorks" class="panel glass-panel info-card">
         <h3 class="section-title">How It Works</h3>
-        <p class="info-text">MooDrop enables secure, direct peer-to-peer file sharing between devices without storing any data on a server.</p>
 
-        <ul class="info-list">
-            <li>📌 <strong>Share Your ID:</strong> Only with trusted contacts.</li>
-            <li>🔗 <strong>Connect to Remote Device:</strong> Enter the remote ID and click <em>Connect</em>.</li>
-            <li>📁 <strong>Select Files:</strong> Choose one or multiple files to send.</li>
-            <li>⏱ <strong>Track Progress:</strong> Each file shows an inline progress bar and download button.</li>
-            <li>✅ <strong>Transfer Completion:</strong> Sender sees <em>Sent</em> and receiver can download files.</li>
-        </ul>
+        <p class="info-text">
+            MooDrop is built on modern peer-to-peer (P2P) browser technology that allows two devices
+            to communicate directly with each other without uploading files to a central server.
+            Unlike traditional cloud-based file sharing services where files are first stored on
+            a remote server before being downloaded, MooDrop creates a temporary direct connection
+            between the sender and the receiver.
+        </p>
 
-        <p class="info-text"><strong>Tips:</strong> Ensure stable internet, use trusted networks, refresh if transfer gets stuck, and check storage for large files.</p>
+        <p class="info-text">
+            This means your files travel straight from your device to the recipient’s device.
+            At no point are they permanently stored, monitored, or processed by an external server.
+            The connection is established securely using real-time communication protocols,
+            ensuring fast and efficient data transfer.
+        </p>
+
+        <h4 class="sub-title">Step 1: Generate Your Unique Remote ID</h4>
+        <p class="info-text">
+            When you open MooDrop, the system automatically generates a temporary Remote ID.
+            This ID acts like your secure address for that session. You can share this ID
+            with someone you trust who wants to send you files. The ID is session-based and
+            changes after refresh or reconnection, which improves safety and prevents reuse.
+        </p>
+
+        <h4 class="sub-title">Step 2: Connect Securely</h4>
+        <p class="info-text">
+            To begin transferring files, the sender enters the recipient’s Remote ID and clicks
+            Connect. Once verified, a secure handshake is established between both devices.
+            This handshake confirms that both parties are online and ready to exchange data.
+            The connection remains active only for the duration of the transfer.
+        </p>
+
+        <h4 class="sub-title">Step 3: Select and Send Files</h4>
+        <p class="info-text">
+            After connection, you can choose one or multiple files from your device.
+            MooDrop supports multi-file selection, allowing efficient bulk transfers.
+            Each file is split into small encrypted chunks and transmitted sequentially
+            to ensure smooth and reliable delivery even on unstable networks.
+        </p>
+
+        <h4 class="sub-title">Step 4: Real-Time Progress Tracking</h4>
+        <p class="info-text">
+            During the transfer process, MooDrop displays a live progress indicator
+            for each file. This helps users monitor upload and download speed in real time.
+            If a connection interruption occurs, the system can retry sending failed
+            chunks automatically without restarting the entire transfer.
+        </p>
+
+        <h4 class="sub-title">Step 5: Transfer Completion</h4>
+        <p class="info-text">
+            Once the transfer is complete, the sender sees a “Sent” confirmation and
+            the receiver can instantly download the received file to their device.
+            The session automatically closes after inactivity, ensuring no open
+            connections remain active longer than necessary.
+        </p>
+
+        <p class="info-text">
+            Because MooDrop does not rely on server-side storage, transfer speeds
+            are primarily dependent on the internet connection quality of both devices.
+            For best performance, users should use a stable Wi-Fi or wired connection
+            and avoid switching networks during transfers.
+        </p>
     </section>
+
 
     <section id="security" class="panel glass-panel info-card">
         <h3 class="section-title">Security</h3>
-        <p class="info-text">MooDrop prioritizes privacy and safety:</p>
 
-        <ul class="info-list">
-            <li>🔒 <strong>Peer-to-Peer Transfer:</strong> No server storage.</li>
-            <li>🛡 <strong>End-to-End Encryption:</strong> AES 256-bit encryption.</li>
-            <li>⏳ <strong>Temporary Connection:</strong> Automatically closes after transfer.</li>
-            <li>👁 <strong>Data Privacy:</strong> No personal data collected or stored.</li>
-            <li>✅ <strong>Connection Verification:</strong> Only correct ID connects.</li>
-        </ul>
+        <p class="info-text">
+            Security and privacy are at the core of MooDrop’s design. Unlike many
+            traditional file-sharing platforms that temporarily store files on servers,
+            MooDrop uses a direct peer-to-peer connection model. This ensures that your
+            files remain between you and the intended recipient only.
+        </p>
 
-        <p class="info-text"><strong>Failure Handling:</strong> If stuck, refresh the page, check network stability, and retry. MooDrop retries failed chunks automatically.</p>
+        <h4 class="sub-title">Peer-to-Peer Architecture</h4>
+        <p class="info-text">
+            In a peer-to-peer system, devices connect directly without routing files
+            through centralized storage servers. This reduces the risk of data breaches,
+            unauthorized access, or server-side vulnerabilities. Since MooDrop does not
+            permanently store files, there is no central database containing user uploads.
+        </p>
+
+        <h4 class="sub-title">End-to-End Encryption (AES-256)</h4>
+        <p class="info-text">
+            MooDrop implements strong encryption standards to protect your data
+            during transmission. All file data is encrypted using AES-256 encryption
+            before being transmitted. AES (Advanced Encryption Standard) with 256-bit
+            keys is widely recognized as a highly secure encryption method used
+            by financial institutions and security-focused systems worldwide.
+        </p>
+
+        <p class="info-text">
+            Encryption ensures that even if network traffic were intercepted,
+            the data would remain unreadable without the proper decryption key.
+            This adds an additional layer of protection against potential
+            cyber threats and man-in-the-middle attacks.
+        </p>
+
+        <h4 class="sub-title">Temporary Session-Based Connections</h4>
+        <p class="info-text">
+            Every connection in MooDrop is temporary and session-based.
+            Once a transfer is completed or the page is refreshed,
+            the connection closes automatically. This prevents lingering
+            open sessions that could otherwise be exploited.
+        </p>
+
+        <h4 class="sub-title">No Personal Data Collection</h4>
+        <p class="info-text">
+            MooDrop does not require account creation, login credentials,
+            or personal identification details. The platform operates without
+            collecting or storing personal user data. This reduces exposure
+            to privacy risks and ensures that your activity remains private.
+        </p>
+
+        <h4 class="sub-title">Connection Verification</h4>
+        <p class="info-text">
+            Transfers only occur when the correct Remote ID is entered.
+            This verification step ensures that files are shared intentionally
+            between trusted devices. Users are encouraged to share Remote IDs
+            only with trusted contacts and avoid posting them publicly.
+        </p>
+
+        <h4 class="sub-title">Failure Handling & Reliability</h4>
+        <p class="info-text">
+            MooDrop includes automatic retry mechanisms for failed file chunks.
+            If the connection drops temporarily due to unstable internet,
+            the system attempts to resend missing portions instead of
+            restarting the entire transfer. This improves both reliability
+            and efficiency.
+        </p>
+
+        <p class="info-text">
+            While MooDrop provides strong technical safeguards, users should
+            always follow best security practices such as using secure networks,
+            keeping browsers updated, and sharing IDs responsibly. Security is
+            strongest when both technology and user awareness work together.
+        </p>
     </section>
+
     <!-- FEATURES -->
     <section id="features" class="panel glass-panel info-card">
         <h3 class="section-title">Features</h3>
 
-        <p class="info-text">MooDrop supports multiple connection types and ensures smooth file transfers:</p>
+        <p class="info-text">
+            MooDrop is designed to deliver fast, secure, and reliable peer-to-peer file
+            sharing without using any cloud storage or third-party servers. Our system
+            uses modern browser technology to create a direct connection between devices,
+            ensuring that your data stays private and under your control at all times.
+            Whether you are transferring personal documents, media files, or large data
+            between devices, MooDrop provides a smooth and distraction-free experience.
+        </p>
+
+        <p class="info-text">
+            Below are the core features that make MooDrop a powerful and secure
+            file-sharing platform:
+        </p>
 
         <ul class="info-list">
-            <li>💻 <strong>PC to PC:</strong> Seamless file sharing between desktop computers.</li>
-            <li>📱 <strong>Mobile to PC:</strong> Send files from your smartphone to your PC effortlessly.</li>
-            <li>💻📱 <strong>PC to Mobile:</strong> Transfer files from PC to mobile devices securely.</li>
-            <li>🔒 <strong>End-to-End Encryption:</strong> All files are encrypted with AES during transfer.</li>
-            <li>📂 <strong>Multiple Files:</strong> Select and send one or multiple files at once with progress tracking.</li>
-            <li>⏳ <strong>Quick Recovery:</strong> If transfers get stuck, refresh the page to resume automatically.</li>
-            <li>📱💻 <strong>Responsive:</strong> Works perfectly on desktop and mobile browsers.</li>
+            <li>💻 <strong>PC to PC:</strong> Seamless file sharing between desktop computers without installing any software.</li>
+            <li>📱 <strong>Mobile to PC:</strong> Send files directly from your smartphone browser to your computer instantly.</li>
+            <li>💻📱 <strong>PC to Mobile:</strong> Transfer files securely from desktop devices to mobile phones in seconds.</li>
+            <li>🔒 <strong>End-to-End Encryption:</strong> All files are encrypted with AES during transfer, protecting your data from unauthorized access.</li>
+            <li>📂 <strong>Multiple Files:</strong> Select and send one or multiple files at once with real-time progress tracking.</li>
+            <li>⚡ <strong>High-Speed Transfer:</strong> Direct device-to-device connection ensures faster speeds compared to traditional cloud uploads.</li>
+            <li>🆔 <strong>Remote ID Connection:</strong> Securely connect devices using a unique Remote ID system.</li>
+            <li>🚫 <strong>No File Storage:</strong> Files are never uploaded or saved on any server.</li>
+            <li>🔄 <strong>Auto Reconnect Support:</strong> If transfers get interrupted, simply refresh and reconnect easily.</li>
+            <li>📱💻 <strong>Responsive:</strong> Works perfectly on desktop and mobile browsers without apps or extensions.</li>
         </ul>
 
-        <p class="info-text"><strong>Note:</strong> Transfers are peer-to-peer, and no files are stored on any server.</p>
+        <p class="info-text">
+            Unlike traditional cloud storage platforms, MooDrop focuses completely on
+            privacy-first file sharing. Since no data is stored on servers, users do not
+            need to worry about storage limits, data tracking, or third-party access.
+            Everything happens in real time between connected devices.
+        </p>
+
+        <p class="info-text">
+            MooDrop is continuously improving with performance optimizations,
+            enhanced encryption layers, and user interface updates to ensure
+            a modern and reliable file-sharing experience for everyone.
+        </p>
+
+        <p class="info-text">
+            <strong>Note:</strong> Transfers are strictly peer-to-peer, and no files are stored on any server.
+        </p>
+    </section>
+
+
+    <!-- FAQ SECTION -->
+    <section id="faq" class="panel glass-panel info-card">
+        <h3 class="section-title">Frequently Asked Questions (FAQ)</h3>
+
+        <div class="faq-item">
+            <h4 class="sub-title">1. What is MooDrop and how is it different from cloud storage?</h4>
+            <p class="info-text">
+                MooDrop is a peer-to-peer (P2P) file sharing platform that allows users to transfer
+                files directly between devices without uploading them to a central server.
+                Unlike traditional cloud storage services where files are stored temporarily
+                or permanently on remote servers, MooDrop creates a direct browser-to-browser
+                connection. This means your files travel straight from sender to receiver
+                without being stored online.
+            </p>
+        </div>
+
+        <div class="faq-item">
+            <h4 class="sub-title">2. Does MooDrop store my files on a server?</h4>
+            <p class="info-text">
+                No. MooDrop does not store, save, or archive any files on external servers.
+                All transfers occur directly between connected devices using peer-to-peer
+                communication. Once the transfer is completed and the session ends,
+                no data remains on the platform.
+            </p>
+        </div>
+
+        <div class="faq-item">
+            <h4 class="sub-title">3. Is MooDrop secure for transferring sensitive files?</h4>
+            <p class="info-text">
+                MooDrop uses strong encryption standards such as AES-256 to secure
+                file data during transmission. Additionally, connections are temporary
+                and session-based, reducing exposure risk. However, users should always
+                ensure they share Remote IDs only with trusted individuals and use
+                secure internet connections when transferring sensitive files.
+            </p>
+        </div>
+
+        <div class="faq-item">
+            <h4 class="sub-title">4. Do I need to create an account to use MooDrop?</h4>
+            <p class="info-text">
+                No account creation or login is required. MooDrop is designed to be
+                simple and privacy-focused. You can start transferring files immediately
+                by generating a Remote ID and connecting to another device.
+            </p>
+        </div>
+
+        <div class="faq-item">
+            <h4 class="sub-title">5. Is there a file size limit?</h4>
+            <p class="info-text">
+                MooDrop does not enforce a strict file size limit from the server side
+                because files are not uploaded to a server. However, transfer speed and
+                stability depend on the internet connection of both devices. Large files
+                may take longer depending on network conditions.
+            </p>
+        </div>
+
+        <div class="faq-item">
+            <h4 class="sub-title">6. Why is my transfer slow?</h4>
+            <p class="info-text">
+                Since MooDrop relies on peer-to-peer communication, transfer speed
+                depends on both the sender's upload speed and the receiver's download speed.
+                Using stable Wi-Fi, avoiding network switching, and minimizing background
+                downloads can improve performance.
+            </p>
+        </div>
+
+        <div class="faq-item">
+            <h4 class="sub-title">7. Can I use MooDrop on mobile devices?</h4>
+            <p class="info-text">
+                Yes. MooDrop is fully responsive and works on modern mobile browsers
+                as well as desktop devices. You can transfer files between PC to PC,
+                mobile to PC, or PC to mobile seamlessly.
+            </p>
+        </div>
+
+        <div class="faq-item">
+            <h4 class="sub-title">8. What happens if the connection drops during transfer?</h4>
+            <p class="info-text">
+                MooDrop includes automatic retry mechanisms for interrupted file chunks.
+                If a transfer is disrupted due to unstable internet, the system attempts
+                to resend the missing parts without restarting the entire process.
+                If the issue persists, refreshing the page and reconnecting may help.
+            </p>
+        </div>
+
+        <div class="faq-item">
+            <h4 class="sub-title">9. How long does a connection stay active?</h4>
+            <p class="info-text">
+                Connections remain active only during the file transfer session.
+                Once the transfer is completed or the page is refreshed, the
+                session closes automatically. This ensures enhanced privacy
+                and prevents unauthorized reuse of connections.
+            </p>
+        </div>
+
+        <div class="faq-item">
+            <h4 class="sub-title">10. Is MooDrop free to use?</h4>
+            <p class="info-text">
+                Yes. MooDrop is completely free to use. There are no hidden charges,
+                subscriptions, or account requirements. The goal is to provide
+                secure and simple file sharing accessible to everyone.
+            </p>
+        </div>
+        <div class="faq-item">
+            <h4 class="sub-title">11. What technology does MooDrop use for file transfer?</h4>
+            <p class="info-text">
+                MooDrop uses WebRTC (Web Real-Time Communication) technology to establish
+                a direct peer-to-peer connection between browsers. This allows real-time
+                encrypted file transfers without relying on traditional cloud storage systems.
+                WebRTC is widely supported by modern browsers and enables secure,
+                low-latency communication between devices.
+            </p>
+        </div>
+
+        <div class="faq-item">
+            <h4 class="sub-title">12. Does MooDrop require software installation?</h4>
+            <p class="info-text">
+                No installation is required. MooDrop runs entirely in your web browser.
+                There is no need to download applications, extensions, or plugins.
+                Simply open the website, generate a Remote ID, and start transferring files.
+            </p>
+        </div>
+
+        <div class="faq-item">
+            <h4 class="sub-title">13. Can I transfer files across different operating systems?</h4>
+            <p class="info-text">
+                Yes. MooDrop works across Windows, macOS, Linux, Android, and iOS devices
+                as long as a modern browser is available. Because it operates within the browser,
+                it is platform-independent and does not require system-specific software.
+            </p>
+        </div>
+
+        <div class="faq-item">
+            <h4 class="sub-title">14. Is MooDrop better than email attachments?</h4>
+            <p class="info-text">
+                For large file transfers, MooDrop is often more efficient than email.
+                Email providers usually limit attachment sizes and may compress files.
+                MooDrop allows direct transfers without compression or storage limits,
+                depending on your internet capacity.
+            </p>
+        </div>
+
+        <div class="faq-item">
+            <h4 class="sub-title">15. How does MooDrop protect user privacy?</h4>
+            <p class="info-text">
+                Privacy is a core principle of MooDrop. Since files are never stored
+                on external servers and transfers occur directly between devices,
+                the platform does not have access to the content being shared.
+                Temporary session-based connections further reduce data exposure.
+            </p>
+        </div>
+
+        <div class="faq-item">
+            <h4 class="sub-title">16. Can MooDrop be used for business purposes?</h4>
+            <p class="info-text">
+                Yes. MooDrop can be used by teams and professionals who need
+                quick, secure file transfers without cloud dependency.
+                However, users should ensure compliance with company
+                data policies when sharing sensitive business information.
+            </p>
+        </div>
+
+        <div class="faq-item">
+            <h4 class="sub-title">17. What should I do if my browser blocks the connection?</h4>
+            <p class="info-text">
+                Some browsers or firewalls may block peer-to-peer connections.
+                Make sure you allow required permissions and disable strict
+                firewall restrictions temporarily if necessary.
+                Using updated browser versions ensures better compatibility.
+            </p>
+        </div>
+
+        <div class="faq-item">
+            <h4 class="sub-title">18. Will MooDrop add premium features in the future?</h4>
+            <p class="info-text">
+                MooDrop is continuously evolving. Future updates may introduce
+                enhanced features, improved transfer optimization, or optional
+                advanced tools. Any updates will prioritize privacy,
+                performance, and user experience.
+            </p>
+        </div>
+
     </section>
 
 
@@ -165,13 +493,26 @@
     <section id="other-projects" class="panel glass-panel info-card">
         <h3 class="section-title">Other Projects</h3>
 
+        <p class="info-text">
+            MooDrop is part of a growing ecosystem of modern web projects focused on
+            performance, security, and user-centered design. In addition to secure
+            peer-to-peer file sharing, we actively develop tools and platforms that
+            enhance productivity, provide technical insights, and deliver engaging
+            digital experiences. Below are some of our featured projects.
+        </p>
+
         <ul class="info-list">
+
             <li>
                 🌐
                 <a href="https://anichan.online" target="_blank">
                     <strong>Anichan</strong>
                 </a> :
-                Anime DataBase Website and Manga
+                An anime database and manga discovery platform designed for anime enthusiasts.
+                Anichan provides structured anime information, character details, episode data,
+                and curated manga listings in a clean and user-friendly interface.
+                The platform focuses on fast loading speeds, organized content presentation,
+                and smooth browsing across desktop and mobile devices.
             </li>
 
             <li>
@@ -179,7 +520,11 @@
                 <a href="https://github.com/Aizen-code-dev/DNS-Lookup-Tool" target="_blank">
                     <strong>DNS Lookup</strong>
                 </a> :
-                Instantly check domain DNS records including A, MX, TXT, and more for quick diagnostics.
+                A lightweight domain diagnostic tool that allows users to instantly check
+                DNS records including A, AAAA, MX, TXT, CNAME, and NS records.
+                This tool is useful for developers, system administrators, and website owners
+                who need quick insights into domain configurations and troubleshooting support.
+                Built with efficiency in mind, it provides accurate results with minimal delay.
             </li>
 
             <li>
@@ -187,12 +532,23 @@
                 <a href="https://github.com/Aizen-code-dev/SpringAI" target="_blank">
                     <strong>Spring AI</strong>
                 </a> :
-                AI-powered chat application built with Spring Boot for smart and interactive conversations.
+                An AI-powered chat application developed using Spring Boot.
+                This project demonstrates integration of artificial intelligence models
+                with backend systems to create smart, responsive, and interactive
+                conversational experiences. It highlights modern backend architecture,
+                scalable design patterns, and API-driven development.
             </li>
 
-
         </ul>
+
+        <p class="info-text">
+            Each project reflects our commitment to modern web standards,
+            secure development practices, and practical real-world solutions.
+            We continuously explore new technologies and build tools that
+            improve digital experiences for users worldwide.
+        </p>
     </section>
+
 
 
 
@@ -232,6 +588,7 @@
 
         </div>
     </section>
+
 
 
 

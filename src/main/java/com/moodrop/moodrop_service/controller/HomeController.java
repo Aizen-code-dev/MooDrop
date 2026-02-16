@@ -37,5 +37,27 @@ public class HomeController {
         return "terms";
     }
 
+    @GetMapping("/blog")
+    public String blogHome() {
+        return "blogs/blog/blog-home";
+    }
+
+    @GetMapping("/blog/how-peer-to-peer-file-sharing-works")
+    public String blog1() {
+        return "blogs/blog/how-peer-to-peer-file-sharing-works";
+    }
+    // Blog 2
+    @GetMapping("/blog/p2p-vs-cloud-storage")
+    public String blog2() {
+        return "blogs/blog/p2p-vs-cloud-storage";
+    }
+
+    // Blog 3
+    @GetMapping("/blog/how-webrtc-enables-secure-file-transfer")
+    public String blog3() {
+        return "blogs/blog/how-webrtc-enables-secure-file-transfer";
+    }
+
+
 
 }

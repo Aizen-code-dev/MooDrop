@@ -1,0 +1,208 @@
+/* ==========================
+   BLOG HERO SECTION
+========================== */
+.blog-hero {
+    padding: 140px 20px 80px;
+    text-align: center;
+}
+
+.blog-hero h1 {
+    font-size: 2.3rem;
+    font-weight: 800;
+    background: linear-gradient(90deg, #00aaff, #0072ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 20px;
+}
+
+.blog-hero p {
+    max-width: 750px;
+    margin: auto;
+    font-size: 1.05rem;
+    color: #333;
+}
+
+/* ==========================
+   BLOG CONTENT CONTAINER
+========================== */
+.blog-intro,
+.blog-posts,
+.blog-cluster,
+.blog-future {
+    max-width: 1000px;
+    margin: 50px auto;
+    padding: 40px 30px;
+    border-radius: 24px;
+    background: rgba(255,255,255,0.25);
+    backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid rgba(255,255,255,0.3);
+    box-shadow: 0 16px 48px rgba(0,0,0,0.08);
+    transition: all 0.3s ease;
+}
+
+.blog-intro:hover,
+.blog-posts:hover,
+.blog-cluster:hover,
+.blog-future:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 25px 60px rgba(0,0,0,0.12);
+}
+
+/* Section Titles */
+.blog-intro h2,
+.blog-posts h2,
+.blog-cluster h2,
+.blog-future h2 {
+    font-size: 1.8rem;
+    font-weight: 800;
+    margin-bottom: 20px;
+    background: linear-gradient(90deg, #00aaff, #0072ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Paragraph Styling */
+.blog-intro p,
+.blog-cluster p,
+.blog-future p {
+    color: #222;
+    font-size: 1rem;
+    line-height: 1.7;
+}
+
+/* ==========================
+   BLOG CARDS
+========================== */
+.blog-card {
+    padding: 30px;
+    margin-bottom: 30px;
+    border-radius: 20px;
+    background: rgba(255,255,255,0.35);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(255,255,255,0.3);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    transition: all 0.3s ease;
+}
+
+.blog-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 18px 50px rgba(0,0,0,0.12);
+}
+
+/* Blog Title */
+.blog-card h3 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+
+.blog-card h3 a {
+    text-decoration: none;
+    color: #0072ff;
+    transition: all 0.3s ease;
+}
+
+.blog-card h3 a:hover {
+    color: #00aaff;
+}
+
+/* Blog Text */
+.blog-card p {
+    color: #111;
+    font-size: 0.98rem;
+    line-height: 1.6;
+}
+
+/* Read More Button */
+.read-more {
+    display: inline-block;
+    margin-top: 12px;
+    font-weight: 600;
+    padding: 8px 18px;
+    border-radius: 14px;
+    background: linear-gradient(135deg, #00aaff, #0072ff);
+    color: white;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.read-more:hover {
+    background: linear-gradient(135deg, #0072ff, #00aaff);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+/* ==========================
+   LIST STYLING
+========================== */
+.blog-intro ul {
+    margin-top: 15px;
+    padding-left: 20px;
+}
+
+.blog-intro ul li {
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+/* ==========================
+   AD SECTIONS
+========================== */
+.ad-slot {
+    margin: 40px auto;
+    padding: 30px;
+    border-radius: 20px;
+    max-width: 1000px;
+    background: rgba(255,255,255,0.25);
+    backdrop-filter: blur(14px);
+    border: 1px dashed rgba(0,170,255,0.3);
+    text-align: center;
+    color: #555;
+}
+
+/* ==========================
+   RESPONSIVE
+========================== */
+@media (max-width: 768px) {
+
+    .blog-hero h1 {
+        font-size: 1.7rem;
+    }
+
+    .blog-intro,
+    .blog-posts,
+    .blog-cluster,
+    .blog-future {
+        padding: 25px 18px;
+    }
+
+    .blog-card {
+        padding: 20px;
+    }
+}
+.trust-section {
+    max-width: 900px;
+    margin: 60px auto;
+    text-align: center;
+}
+.blog-meta {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 25px;
+    font-size: 0.95rem;
+    color: #666;
+}
+
+.reading-badge {
+    background: #f2f4f7;
+    color: #333;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-weight: 500;
+    font-size: 0.85rem;
+}
+
+.publish-date {
+    font-weight: 500;
+}
